@@ -1,13 +1,3 @@
-"""
-Title:        TSSCI_MediaPlayer
-Description:  This script got the abilty to show and create from TSCCI animation
-              this is the final phase of createTSSCI project
-Author:       Haim Fellner Cohen and Gal Zohar
-Date:         2024-06-22
-Version:      1.0
-"""
-
-
 import numpy as np
 from PIL import Image
 import matplotlib.pyplot as plt
@@ -20,16 +10,13 @@ import os
 from pathlib import Path
 import tkinter as tk
 from tkinter import Listbox, END, Frame
-
-# Get the current working directory
-current_directory = Path.cwd()
-
-# Set matplotlib backend
 import matplotlib
 
 matplotlib.use('TkAgg')
 
-rate = 3
+rate = 9
+# Get the current working directory
+current_directory = Path.cwd()
 
 class MediaPlayer:
     def __init__(self, parent, rate=1.0):
@@ -37,33 +24,44 @@ class MediaPlayer:
         self.rate = rate
         self.index = 0
         self.forward = True  # To track the direction of playback
-        self.fig, self.ax = plt.subplots(figsize=(10, 5))
-        self.fig.subplots_adjust(bottom=0.3)  # Adjust bottom to make room for new buttons and rate display
+        self.fig, self.ax = plt.subplots(figsize=(14, 7))  # Adjusted figure size
+        self.fig.subplots_adjust(left=0.05, right=0.65, top=0.95, bottom=0.2)  # Adjusted subplot positions
 
         # Create existing buttons
-        axprev = plt.axes([0.05, 0.1, 0.1, 0.1])
-        axnext = plt.axes([0.15, 0.1, 0.1, 0.1])
-        axpause = plt.axes([0.25, 0.1, 0.1, 0.1])
-        axresume = plt.axes([0.35, 0.1, 0.1, 0.1])
-        ax_rotate_90 = plt.axes([0.45, 0.1, 0.1, 0.1])
-        ax_rotate_neg_90 = plt.axes([0.55, 0.1, 0.1, 0.1])
-        ax_change_direction = plt.axes([0.65, 0.1, 0.1, 0.1])
-        ax_change_speed = plt.axes([0.75, 0.1, 0.1, 0.1])
-        ax_decrease_speed = plt.axes([0.85, 0.1, 0.1, 0.1])
+        axprev = plt.axes([0.05, 0.1, 0.05, 0.075])
+        axnext = plt.axes([0.10, 0.1, 0.05, 0.075])
+        axpause = plt.axes([0.15, 0.1, 0.05, 0.075])
+        axresume = plt.axes([0.20, 0.1, 0.05, 0.075])
+        ax_rotate_90 = plt.axes([0.25, 0.1, 0.05, 0.075])
+        ax_rotate_neg_90 = plt.axes([0.30, 0.1, 0.05, 0.075])
+        ax_change_direction = plt.axes([0.35, 0.1, 0.05, 0.075])
+        ax_change_speed = plt.axes([0.40, 0.1, 0.05, 0.075])
+        ax_decrease_speed = plt.axes([0.45, 0.1, 0.05, 0.075])
 
         # Position for the rate window and export button
-        self.ax_rate = plt.axes([0.45, 0.02, 0.1, 0.05])
-        ax_export = plt.axes([0.56, 0.02, 0.1, 0.05])
+        self.ax_rate = plt.axes([0.15, 0.02, 0.1, 0.05])
+        ax_export = plt.axes([0.28, 0.02, 0.1, 0.05])
 
         self.bprev = self.create_image_button(axprev, os.path.join(current_directory, "icons", "prev.png"), self.prev)
         self.bnext = self.create_image_button(axnext, os.path.join(current_directory, "icons", "next.png"), self.next)
-        self.bpause = self.create_image_button(axpause, os.path.join(current_directory, "icons", "pause.png"), self.pause)
-        self.bresume = self.create_image_button(axresume, os.path.join(current_directory, "icons", "play.png"), self.resume)
-        self.b_rotate_90 = self.create_image_button(ax_rotate_90, os.path.join(current_directory, "icons", "Rot.png"), self.rotate_90)
-        self.b_rotate_neg_90 = self.create_image_button(ax_rotate_neg_90, os.path.join(current_directory, "icons", "negRot.png"), self.rotate_neg_90)
-        self.b_change_direction = self.create_image_button(ax_change_direction, os.path.join(current_directory, "icons", "reverse.png"), self.change_direction)
-        self.b_change_speed = self.create_image_button(ax_change_speed, os.path.join(current_directory, "icons", "speed.png"), self.change_speed)
-        self.b_decrease_speed = self.create_image_button(ax_decrease_speed, os.path.join(current_directory, "icons", "slow.png"), self.decrease_speed)
+        self.bpause = self.create_image_button(axpause, os.path.join(current_directory, "icons", "pause.png"),
+                                               self.pause)
+        self.bresume = self.create_image_button(axresume, os.path.join(current_directory, "icons", "play.png"),
+                                                self.resume)
+        self.b_rotate_90 = self.create_image_button(ax_rotate_90, os.path.join(current_directory, "icons", "Rot.png"),
+                                                    self.rotate_90)
+        self.b_rotate_neg_90 = self.create_image_button(ax_rotate_neg_90,
+                                                        os.path.join(current_directory, "icons", "negRot.png"),
+                                                        self.rotate_neg_90)
+        self.b_change_direction = self.create_image_button(ax_change_direction,
+                                                           os.path.join(current_directory, "icons", "reverse.png"),
+                                                           self.change_direction)
+        self.b_change_speed = self.create_image_button(ax_change_speed,
+                                                       os.path.join(current_directory, "icons", "speed.png"),
+                                                       self.change_speed)
+        self.b_decrease_speed = self.create_image_button(ax_decrease_speed,
+                                                         os.path.join(current_directory, "icons", "slow.png"),
+                                                         self.decrease_speed)
 
         self.b_export = Button(ax_export, 'Export')
         self.b_export.on_clicked(self.export_animation)
@@ -83,6 +81,15 @@ class MediaPlayer:
         # Bind the window close event
         self.parent.protocol("WM_DELETE_WINDOW", self.on_close)
 
+        # Load the TSSCI image and display it on the right side
+        self.tssci_image_ax = self.fig.add_axes([0.7, 0.1, 0.25, 0.8])  # Adjusted position and size
+        self.tssci_image_ax.axis('off')
+        self.tssci_image = None
+        self.red_line = None
+
+        self.canvas.mpl_connect('button_press_event', self.on_click)
+        self.canvas.mpl_connect('motion_notify_event', self.on_mouse_move)
+
     def create_image_button(self, ax, image_path, callback):
         img = plt.imread(image_path)
         imagebox = OffsetImage(img, zoom=0.05)  # Adjust zoom to make the icons smaller
@@ -92,11 +99,33 @@ class MediaPlayer:
         button.on_clicked(callback)
         return button
 
-    def draw_lines(self, x_values, y_values, segments):
+    def detect_gaps(self, x_values, y_values):
+        # Detect missing points based on whether consecutive points are identical
+        missing_indices = [i for i in range(1, len(x_values)) if x_values[i] == x_values[i-1] and y_values[i] == y_values[i-1]]
+        gaps = []
+        start_idx = None
+
+        for i in range(len(missing_indices) - 1):
+            if missing_indices[i+1] == missing_indices[i] + 1:
+                if start_idx is None:
+                    start_idx = missing_indices[i]
+            else:
+                if start_idx is not None:
+                    gaps.append((start_idx, missing_indices[i]))
+                    start_idx = None
+
+        if start_idx is not None:
+            gaps.append((start_idx, missing_indices[-1]))
+
+        return gaps
+
+    def draw_lines(self, x_values, y_values, segments, gaps):
         for segment in segments:
-            line_x = [x_values[i] for i in segment]
-            line_y = [y_values[i] for i in segment]
-            self.ax.plot(line_x, line_y, color='gray', alpha=0.5)
+            for i in range(len(segment) - 1):
+                if not any(gap[0] <= segment[i] <= gap[1] or gap[0] <= segment[i+1] <= gap[1] for gap in gaps):
+                    self.ax.plot([x_values[segment[i]], x_values[segment[i+1]]],
+                                 [y_values[segment[i]], y_values[segment[i+1]]],
+                                 color='gray', alpha=0.5)
 
     def update_plot(self, *args):
         if not self.paused and hasattr(self, 'data'):
@@ -107,6 +136,13 @@ class MediaPlayer:
             c_values = [point[2] for point in row]
 
             self.scatter = self.ax.scatter(x_values, y_values, c=c_values, cmap='viridis', edgecolors='none')
+
+            # Annotate each point with its index
+            for i, (x, y) in enumerate(zip(x_values, y_values)):
+                self.ax.annotate(str(i), (x, y), textcoords="offset points", xytext=(0, 5), ha='center')
+
+            # Detect gaps
+            gaps = self.detect_gaps(x_values, y_values)
 
             # Define segments to connect
             segments = [
@@ -120,7 +156,7 @@ class MediaPlayer:
                 [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 48],  # Outer lip (closed loop)
                 [60, 61, 62, 63, 64, 65, 66, 67, 60]  # Inner lip (closed loop)
             ]
-            self.draw_lines(x_values, y_values, segments)
+            self.draw_lines(x_values, y_values, segments, gaps)
 
             self.ax.set_title(f'Graph for Line {self.index}')
             self.ax.set_xlabel('x')
@@ -133,6 +169,16 @@ class MediaPlayer:
                 self.index = (self.index - 1) % len(self.data)
                 if self.index < 0:
                     self.index = len(self.data) - 1
+
+            # Display the TSSCI image if it is loaded
+            if self.tssci_image is not None:
+                self.tssci_image_ax.clear()
+                self.tssci_image_ax.imshow(self.tssci_image)
+                if self.red_line is not None:
+                    self.red_line.remove()
+                self.red_line = self.tssci_image_ax.axhline(y=self.index, color='red', linestyle='-', linewidth=3)
+                self.tssci_image_ax.axis('off')
+                self.canvas.draw()
 
     def next(self, event):
         if self.paused:
@@ -156,6 +202,13 @@ class MediaPlayer:
 
             self.scatter = self.ax.scatter(x_values, y_values, c=c_values, cmap='viridis', edgecolors='none')
 
+            # Annotate each point with its index
+            for i, (x, y) in enumerate(zip(x_values, y_values)):
+                self.ax.annotate(str(i), (x, y), textcoords="offset points", xytext=(0, 5), ha='center')
+
+            # Detect gaps
+            gaps = self.detect_gaps(x_values, y_values)
+
             # Define segments to connect
             segments = [
                 [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16],  # Jawline
@@ -168,12 +221,22 @@ class MediaPlayer:
                 [48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 48],  # Outer lip (closed loop)
                 [60, 61, 62, 63, 64, 65, 66, 67, 60]  # Inner lip (closed loop)
             ]
-            self.draw_lines(x_values, y_values, segments)
+            self.draw_lines(x_values, y_values, segments, gaps)
 
             self.ax.set_title(f'Graph for Line {self.index}')
             self.ax.set_xlabel('x')
             self.ax.set_ylabel('y')
             self.canvas.draw()
+
+            # Display the TSSCI image if it is loaded
+            if self.tssci_image is not None:
+                self.tssci_image_ax.clear()
+                self.tssci_image_ax.imshow(self.tssci_image)
+                if self.red_line is not None:
+                    self.red_line.remove()
+                self.red_line = self.tssci_image_ax.axhline(y=self.index, color='red', linestyle='-', linewidth=3)
+                self.tssci_image_ax.axis('off')
+                self.canvas.draw()
 
     def rotate_90(self, event):
         for i in range(len(self.data)):
@@ -236,12 +299,28 @@ class MediaPlayer:
         self.index = 0  # Reset index for new data
         self.update_plot_immediate()
 
+        # Load the TSSCI image
+        self.tssci_image = plt.imread(image_path)
+
     def export_animation(self, event):
         anim = FuncAnimation(self.fig, self.update_plot, frames=len(self.data), repeat=False)
         anim_folder = os.path.join(current_directory, "animation")
         os.makedirs(anim_folder, exist_ok=True)
         anim.save(os.path.join(anim_folder, f'{self.image_name}_animation.gif'), writer='pillow', fps=10)
         print(f"Animation exported as {self.image_name}_animation.gif")
+
+    def on_click(self, event):
+        if event.inaxes == self.tssci_image_ax:
+            self.update_index_from_mouse(event.ydata)
+
+    def on_mouse_move(self, event):
+        if event.inaxes == self.tssci_image_ax and event.button:
+            self.update_index_from_mouse(event.ydata)
+
+    def update_index_from_mouse(self, ydata):
+        if ydata is not None:
+            self.index = int(ydata)
+            self.update_plot_immediate()
 
 def update_listbox(folder, listbox):
     listbox.delete(0, END)
@@ -275,4 +354,8 @@ def loadImage():
 
     root.mainloop()
 
-#loadImage()
+def main():
+    loadImage()
+
+if __name__ == "__main__":
+    main()
