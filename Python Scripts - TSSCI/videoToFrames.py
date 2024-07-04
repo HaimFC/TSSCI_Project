@@ -4,7 +4,7 @@ Description:  This script make frames from video.
               this is the first phase of createTSSCI project
 Author:       Haim Fellner Cohen and Gal Zohar
 Date:         2024-06-22
-Version:      1.0
+Version:      1.1
 """
 
 import cv2
@@ -27,7 +27,7 @@ def extract_frames(video_path, output_folder):
         success, image = vidcap.read()
         count += 1
     if count != 0:
-        print(f"Extracted {count} frames from the video.")
+        print(f"Extracted {count} frames from the videos.")
 
 
 # current_directory = Path.cwd()
