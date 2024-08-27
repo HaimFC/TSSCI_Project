@@ -8,7 +8,7 @@ The Time Series to Single Composite Image (TSSCI) Tool is designed to transform 
 
 This tool is particularly useful in applications such as motion classification, quality assessment, and synthesis of new motion sequences. The TSSCI format facilitates the efficient processing of motion data by converting the temporal evolution of movements into a static image, enabling deep learning models pre-trained on image data to analyze human motion.
 
-## OpenPose
+### OpenPose
 
 OpenPose is a real-time system that can detect and analyze human body movements by identifying key points on the human body, face, hands, and feet from images and videos. Developed by the Carnegie Mellon Perceptual Computing Lab, OpenPose uses deep learning to extract 2D and 3D pose information, capturing the spatial coordinates of key joints and body parts. This technology is widely used in fields like computer vision, motion analysis, gesture recognition, and augmented reality, enabling precise tracking of human motion for various applications.
 
