@@ -1,6 +1,4 @@
-# TSSCI_Project
-
-![alt text](https://drive.google.com/file/d/188FGbvkphvq9ZTNdUjYavWV3oa1M1BHB/view?usp=sharing)
+![screenshot](Title.png)
 
 Remember to download all the scripts and icons folder, store them both on the same folder.
 
