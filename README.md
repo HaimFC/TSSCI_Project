@@ -1,6 +1,6 @@
 # TSSCI_Project
 
-![alt text]([http://url/to/img.png](https://drive.google.com/file/d/188FGbvkphvq9ZTNdUjYavWV3oa1M1BHB/view?usp=sharing))
+![alt text](https://drive.google.com/file/d/188FGbvkphvq9ZTNdUjYavWV3oa1M1BHB/view?usp=sharing)
 
 Remember to download all the scripts and icons folder, store them both on the same folder.
 
