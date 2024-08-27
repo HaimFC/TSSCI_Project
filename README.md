@@ -1,4 +1,6 @@
-![screenshot](Title.png)
+<p align="center">
+  <img src="Title.png" alt="screenshot">
+</p>
 
 # TSSCI Tool
 The Time Series to Single Composite Image (TSSCI) Tool is designed to transform human motion captured in videos into a single composite image. This image representation condenses the spatial-temporal information of motion into a compact format, making it suitable for analysis using established computer vision techniques. Each TSSCI image is composed of pixel lines, with each line representing a frame from the video. The pixels encode the x and y coordinates of key points detected by OpenPose, along with their confidence levels.
