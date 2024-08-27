@@ -19,3 +19,8 @@ The TSSCI Player is a specialized media player designed to visualize TSSCI image
 
 Both the TSSCI Tool and Player are designed to simplify and enhance the analysis of human motion, bridging the gap between temporal data and image-based deep learning techniques.
 
+### Instructions
+
+### Requirments
+
+
