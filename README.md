@@ -1,4 +1,4 @@
-# TSSCI_Project
+![screenshot](Tile.png)
 
 ![alt text](https://drive.google.com/file/d/188FGbvkphvq9ZTNdUjYavWV3oa1M1BHB/view?usp=sharing)
 
