@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="Title.png" alt="screenshot">
+  <img src="readme\Title.png" alt="screenshot">
 </p>
 
 # TSSCI Tool
